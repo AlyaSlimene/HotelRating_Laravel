@@ -34,9 +34,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
-        //
+        $User=new User;
+        $User->nom=$req->nom;
+        $User->prenom=$req->prenom;
+        $User->email= $req->email;
+        $User->numtel= $req->numtel;
+        $User->password=$req->password;
+        $User->admin=0;
+        $User->save();
+        return redirect('/login');
     }
 
     /**

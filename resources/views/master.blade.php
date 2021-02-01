@@ -22,7 +22,30 @@
 .custom-login{
     height:500px;
     padding-top:100px;
-
 }
+img.slider-img{
+  height:300px !important;
+  max-width: 100%;  
+}
+.custom-hotel{
+  height:700px;
+}
+.carousel_bg{
+  background-color: black;
+}
+.trending-image{
+  height:100px;
+}
+.avis-hotel{
+  padding-bottom:50px;
+  padding-left:50px;
+  padding-right:50px;
+  padding-top:50px;
+  color: green;
+  text-align: center;
+  }
+  .btn-cls{
+    padding-top:20px;
+  }
 </style>
 </html>

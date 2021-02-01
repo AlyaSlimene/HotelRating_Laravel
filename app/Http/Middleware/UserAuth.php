@@ -21,5 +21,10 @@ class UserAuth
           return redirect('/');
          }
         return $next($request);
+        if($request->path()=="detail" && !$request->session()->has('user'))
+        {
+         return redirect('/login');
+        }
+       return $next($request);
     }
 }
