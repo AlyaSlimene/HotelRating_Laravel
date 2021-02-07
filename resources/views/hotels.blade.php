@@ -46,6 +46,27 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Choix de l'hôtel
+    <span class="caret"></span>
+  </button>
+  @error('message')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  @foreach ($hotels as $item)
+    <li><a href="/editrating/{{$item->id}}">{{ $item->nomHotel }}</a></li>
+    
+    <li role="separator" class="divider"></li>
+    @endforeach 
+  </ul>
 </div>
+<a  href="#" class="btn btn-info" role="button">Synthèse</a>
+</div>
+ 
+    
+ 
 
 @endsection

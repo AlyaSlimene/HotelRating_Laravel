@@ -1,3 +1,12 @@
+<?php
+/*<?php use Illuminate\Support\Facades\URL;
+echo URL::current(); 
+<input type="hidden" name="idhot" value="{{$rating['idHotel']}}">
+?>*/
+
+use App\Models\Hotel;
+$hotels=Hotel::all();
+?>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,14 +24,29 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home </a></li>
-        <li class=""><a href="/rating">Rating</a></li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rating<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/hotelMR">Faire Rating hotel</a></li>
+            <li class="dropdown-submenu"><a class="test" href="#">Voir Rating hotel<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                            @foreach ($hotels as $item)
+                              <li><a href="/editrating/{{$item->id}}">{{ $item->nomHotel }}</a></li>
+                              <li role="separator" class="divider"></li>
+                            @endforeach 
+                 </ul>
+            </li>
+          </ul>
+          <li>
+              <form action="/search" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Chercher Hotel</button>
+              </form>
+           </li>
       </ul>
-      <form action="/search" class="navbar-form navbar-left">
-        <div class="form-group">
-            <input type="text" name="query" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Chercher Hotel</button>
-      </form>
+      
       <ul class="nav navbar-nav navbar-right">
          @if(Session::has('user'))   
         <li class="dropdown">
@@ -39,3 +63,12 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+</script>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Rating;
 use Session;
+use Validator,Redirect,Response;
 use Illuminate\Support\Facades\DB;
 class HotelController extends Controller
 {
@@ -51,10 +52,10 @@ class HotelController extends Controller
      */
     public function addrating($id)
     {
-        if(session()->has('user'))
+        if(session()->has('user') && isset($id))
         {
           $rating=new Rating;
-           $rating->idHotel=$id;
+          $rating->idHotel=$id;
            return view ('Ratings',['rating'=>$rating]);
           //return view ('Ratings',['rating'=>$req]);
           
@@ -110,7 +111,16 @@ class HotelController extends Controller
           
            //return redirect('/');
     }
-
+    public function Statistiques($id)
+    {  $uri = url()->previous(); echo $uri;
+        if (stripos($uri, '/editrating/')!==false)
+        {       
+            return("IA NLP module en cours de construction");
+        }
+        else{
+            return("IA2 NLP module en cours de construction");
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -119,7 +129,8 @@ class HotelController extends Controller
      */
     public function editrating($id)
     {
-       $user_id=Session::get('user')['id'];
+       //$user_id=Session::get('user')['id'];
+       
        $Res=DB::table('ratings')
        ->join('hotels','hotels.id','=','ratings.idHotel')
        ->where('ratings.idHotel',$id)
@@ -149,6 +160,28 @@ class HotelController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+    public function validation(Request $request)
+    {
+        /*
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'mobile_number' => 'required|unique:users'
+            ]);
+        */
+            request()->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'mobile_number' => 'required'
+                ]);
+             
+            //$data = $request->all();
+           
+            //$check = Customer::create($data);
+            //return 'Great! Form successfully submit with validation.';
+            return Redirect::to("/hotelMR")->withSuccess('Great! Form successfully submit with validation.');
+    
     }
 
     /**

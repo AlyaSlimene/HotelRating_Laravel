@@ -10,7 +10,7 @@ $nbrAvis=HotelController::Nbreratings($id);
 
 
 <div class="customer-hotel">
-<h3 class="avis-hotel"> Details Avis pour Hôtels  {{$res->nomHotel}} ({{$nbrAvis}} avis) <br><br><a  href="#" class="btn btn-info" role="button">Synthèse</a> </h3>
+<h3 class="avis-hotel"> Details Avis pour Hôtels  {{$res->nomHotel}} ({{$nbrAvis}} avis) <br><br><a  href="/Stats/{{$id}}" class="btn btn-info" role="button">Synthèse</a> </h3>
 
 
 <div class="col-sm-10">

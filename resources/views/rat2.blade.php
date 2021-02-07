@@ -1,11 +1,23 @@
 @extends('master')
 @section('content')
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Evaluation d'hôtel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
 <style>
 .error{ color:red; } 
 </style>
-
+</head>
+<body>
 <div class="container custom-login"> 
-<h2 style="margin-top: 10px;">Evaluation d'un hôtel</h2>
+<h2 style="margin-top: 10px;">Laravel 5.7 Jquery Form Validation Example - Tutsmake.com</h2>
 <br>
 <br>
 @if ($message = Session::get('success'))
@@ -33,7 +45,7 @@ $hotels=Hotel::all();
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
                 <H3> bonjour </H3>
-                <div id="errorDiv"> {{ $errors}}</div>
+                <div id="errorDiv"></div>
                 <form id="Formadd" action="/valrating" method="POST">
                 @csrf
 
@@ -46,15 +58,14 @@ $hotels=Hotel::all();
                             <option value="{{$hot['id']}}"> {{$hot['nomHotel']}}</option>
                            @endforeach 
                         </select>
-                        <div class="text-danger">{{ $errors->first('hotel') }}</div>
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
                 </div>
                     <div class="form-group form-check">
                         <label class="form-check-label"> Accueil:</label>
                         <input class="form-check-input" type="radio" name="acc" id="accss" value="3"> Très satisfaisant
                         <input class="form-check-input" type="radio" name="acc" id="accs" value="2"> Satisfaisant
                         <input class="form-check-input" type="radio" name="acc" id="accps" value="1"> Peu Satisfaisant
-                        <br><label for="acc" class="error"></label>
-   
+                        
                     </div>
                     
                     <div class="form-group form-check">
@@ -62,29 +73,24 @@ $hotels=Hotel::all();
                         <input class="form-check-input" type="radio" name="res" id="resss" value="3"> Très satisfaisant
                         <input class="form-check-input" type="radio" name="res" id="ress" value="2"> Satisfaisant
                         <input class="form-check-input" type="radio" name="res" id="resps" value="1"> Peu Satisfaisant
-                        <br><label for="res" class="error"></label>
                     </div>
                     <div class="form-group form-check">
                         <label class="form-check-label"> Hygiene:</label>
                         <input class="form-check-input" type="radio" name="hyg" id="hygss" value="3"> Très satisfaisant
                         <input class="form-check-input" type="radio" name="hyg" id="hygs" value="2"> Satisfaisant
                         <input class="form-check-input" type="radio" name="hyg" id="hygps"value="1"> Peu Satisfaisant
-                        <div class="text-danger">{{ $errors->first('hyg') }}</div>
-                        <br><label for="hyg" class="error"></label>
                     </div>
 
                     <div class="form-group form-check">
                         <label class="form-check-label"> Extra:</label>
-                        <input class="form-check-input" type="checkbox" name="extra[]" id="extra1" value="3"> Piscine couverte
-                        <input class="form-check-input" type="checkbox" name="extra[]" id="extra2" name="extra1"value="2"> Plage privée
-                        <input class="form-check-input" type="checkbox" name="extra[]" id="extra3" value="1"> Couverture Wifi
-                        <br><label for="extra[]" class="error"></label>
+                        <input class="form-check-input" type="checkbox" name="extra1" id="extra1" value="3"> Piscine couverte
+                        <input class="form-check-input" type="checkbox" name="extra2" id="extra2" name="extra1"value="2"> Plage privée
+                        <input class="form-check-input" type="checkbox" name="extra3" id="extra3" value="1"> Couverture Wifi
+                        
                     </div>
-                    
-                    
-                    <div class="form-group shadow-textarea">
-                          <label for="comment">Autres Remarques:</label>
-                          <textarea class="form-control z-depth-1" name="comment" id="comment" rows="3" placeholder="Notez ici vos remarques..."></textarea>
+                    <div class="form-group form-check">
+                    <label class="form-check-label"> Autres Remarques:</label>
+                        <textArea  name="desc" id="comment" name="comment" placeholder="Mettez  remarques ici"></textArea>
                     </div>
                     <button type="submit" id="submitButton" class="btn btn-primary">Envoyer</button>
                 </form>
@@ -106,15 +112,12 @@ required: true
 hyg: {
 required: true
 },  
-extra1: {
-required: true
-},  
-'extra[]': {
+comment: {
 required: true
 },  
 },
 messages: {
-hotel: {
+name: {
 required: "SVP selectionner hôtel à évaluer"
 },
 acc: {
@@ -126,12 +129,10 @@ required: "SVP évaluer service restauration de l'hôtel"
 hyg: {
 required: "SVP évaluer service hygiène de l'hôtel"
 },
-'extra[]':{
-required: "SVP au moins un service d'extra doit être sélèctionné"   
-}
 },
 })
 }
 </script>
-
+</body>
+</html>
 @endsection

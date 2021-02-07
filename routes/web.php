@@ -24,6 +24,17 @@ Route::get('/logout',function(){
 Route::get('/enregistrer', function () {
     return view('enregistrer');
 });
+
+Route::get('/hotelMR',function(){
+    return view('Ratings');
+});
+
+/*
+Route::get('/hotelMR',function(){
+    return view('jquery-form');
+});
+*/
+Route::get('/Stats/{id}',[HotelController::class,'Statistiques']);
 Route::post("/login",[UserController::class,'login']);
 Route::post("/enregistrer",[UserController::class,'create']);
 Route::get("/",[HotelController::class,'index']);
@@ -31,4 +42,6 @@ Route::get("detail/{id}",[HotelController::class,'detail']);
 Route::get("search",[HotelController::class,'search']);
 Route::get("addrating/{id}",[HotelController::class,'addrating']);
 Route::post("valrating",[HotelController::class,'valrating']);
+Route::post("validation",[HotelController::class,'validation']);
+
 Route::get("editrating/{id}",[HotelController::class,'editrating']);
